@@ -13,7 +13,7 @@ set -euo pipefail
 : "${AIRFLOW__CORE__EXECUTOR:=CeleryExecutor}"
 export AIRFLOW__CORE__EXECUTOR
 
-cmd=(airflow celery worker --queues "${WORKER_QUEUES}" --hostname "${WORKER_HOSTNAME}" --concurrency "${WORKER_CONCURRENCY}")
+cmd=(airflow celery worker -q "${WORKER_QUEUES}" -H "${WORKER_HOSTNAME}" -c "${WORKER_CONCURRENCY}")
 
 if [[ -n "${WORKER_AUTOSCALE}" ]]; then
   cmd+=(--autoscale "${WORKER_AUTOSCALE}")
