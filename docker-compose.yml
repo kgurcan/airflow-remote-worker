@@ -6,17 +6,18 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        AIRFLOW_IMAGE: ${AIRFLOW_IMAGE:-apache/airflow:2.8.0}
+        AIRFLOW_IMAGE: ${AIRFLOW_IMAGE:-apache/airflow:2.10.2-python3.11}
     image: airflow-remote-worker:latest
     container_name: airflow-worker-kg5090
     env_file:
       - .env
     environment:
-      WORKER_QUEUES: ${WORKER_QUEUES:-massive_trades}
-      WORKER_CONCURRENCY: ${WORKER_CONCURRENCY:-128}
+      WORKER_QUEUES: ${WORKER_QUEUES:-default}
+      WORKER_CONCURRENCY: ${WORKER_CONCURRENCY:-8}
       WORKER_HOSTNAME: ${WORKER_HOSTNAME:-kg5090@%h}
       WORKER_AUTOSCALE: ${WORKER_AUTOSCALE:-}
     volumes:
-      - /path/to/dags/on/kg5090:/opt/airflow/dags:ro
-      # - /path/to/plugins:/opt/airflow/plugins:ro   # optional
+      # Mount DAGs and jobs from airflow-python-jobs repo (Windows Docker path)
+      - /c/Users/konur/Documents/fidget_repo/airflow-python-jobs/dags:/opt/airflow/dags:ro
+      - /c/Users/konur/Documents/fidget_repo/airflow-python-jobs/jobs:/opt/airflow/jobs:ro
     restart: unless-stopped

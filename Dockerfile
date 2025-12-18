@@ -1,6 +1,6 @@
 # Minimal worker-only image built on the official Airflow image.
 # Override AIRFLOW_IMAGE at build time to match prod exactly.
-ARG AIRFLOW_IMAGE=apache/airflow:2.8.0
+ARG AIRFLOW_IMAGE=apache/airflow:2.10.2-python3.11
 FROM ${AIRFLOW_IMAGE}
 
 # Copy the worker startup script
