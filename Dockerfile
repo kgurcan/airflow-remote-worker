@@ -3,11 +3,23 @@
 ARG AIRFLOW_IMAGE=apache/airflow:2.10.2-python3.11
 FROM ${AIRFLOW_IMAGE}
 
-# Install Celery provider and Redis backend
+# Install all required packages (must match kg-pc's requirements)
 USER airflow
 RUN pip install --no-cache-dir \
     apache-airflow-providers-celery \
-    redis
+    apache-airflow-providers-postgres \
+    redis \
+    httpx \
+    pydantic \
+    pydantic-settings \
+    openai \
+    tenacity \
+    python-dateutil \
+    pytz \
+    psycopg2-binary \
+    "pymongo[srv]" \
+    clickhouse-connect \
+    certifi
 
 # Switch to root to copy and set permissions
 USER root
