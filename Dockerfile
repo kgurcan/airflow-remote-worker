@@ -19,7 +19,8 @@ RUN pip install --no-cache-dir \
     psycopg2-binary \
     "pymongo[srv]" \
     clickhouse-connect \
-    certifi
+    certifi \
+    "filelock>=3.13.0,<4.0"
 
 # Switch to root to copy and set permissions
 USER root

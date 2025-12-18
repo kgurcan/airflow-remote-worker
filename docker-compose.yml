@@ -12,7 +12,7 @@ services:
     env_file:
       - .env
     environment:
-      # Only listen to massive_trades queue - fetch_and_upsert_trades_batch tasks
+      # Only listen to massive_trades queue
       WORKER_QUEUES: ${WORKER_QUEUES:-massive_trades}
       WORKER_CONCURRENCY: ${WORKER_CONCURRENCY:-128}
       WORKER_HOSTNAME: ${WORKER_HOSTNAME:-kg5090@%h}
