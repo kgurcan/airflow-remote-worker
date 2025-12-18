@@ -14,7 +14,7 @@ services:
     environment:
       # Only listen to massive_trades queue - fetch_and_upsert_trades_batch tasks
       WORKER_QUEUES: ${WORKER_QUEUES:-massive_trades}
-      WORKER_CONCURRENCY: ${WORKER_CONCURRENCY:-8}
+      WORKER_CONCURRENCY: ${WORKER_CONCURRENCY:-128}
       WORKER_HOSTNAME: ${WORKER_HOSTNAME:-kg5090@%h}
       WORKER_AUTOSCALE: ${WORKER_AUTOSCALE:-}
     volumes:
